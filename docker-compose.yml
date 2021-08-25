@@ -1,0 +1,14 @@
+version: '2'
+services:
+  db:
+    build: ./db
+    restart: always
+    container_name: postgres_golang_resftul_api
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=golang_restful_api
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./db/db-data:/var/lib/postgresql/data

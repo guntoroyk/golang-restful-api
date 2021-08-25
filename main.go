@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/go-playground/validator"
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/julienschmidt/httprouter"
-	"golang-restful-api/app"
+	_ "github.com/lib/pq"
 	"golang-restful-api/controller"
+	"golang-restful-api/db"
 	"golang-restful-api/exception"
 	"golang-restful-api/helper"
 	"golang-restful-api/repository"
@@ -15,7 +15,16 @@ import (
 
 func main() {
 
-	db := app.NewDB()
+	dbConfig := db.Config{
+		User: "postgres",
+		Password: "admin",
+		DBName: "golang_restful_api",
+		Port: 5433,
+		Host: "localhost",
+		SSLMode: "disable",
+	}
+
+	db := db.NewDB(dbConfig)
 	validate := validator.New()
 	categoryRepository := repository.NewCategoryRepository()
 	categoryService := service.NewCategoryService(categoryRepository, db, validate)
