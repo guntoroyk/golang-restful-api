@@ -17,15 +17,18 @@ func NewCategoryRepository() CategoryRepository {
 }
 
 func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Category {
-	SQL := "insert into category(name) values ($1)"
+	SQL := "insert into category(name) values ($1) returning id"
 
-	result, err := tx.ExecContext(ctx, SQL, category.Name)
+	rows, err := tx.QueryContext(ctx, SQL, category.Name)
 	helper.PanicIfError(err)
+	defer rows.Close()
 
-	id, err := result.RowsAffected()
-	helper.PanicIfError(err)
+	if rows.Next() {
+		err := rows.Scan(&category.Id)
+		helper.PanicIfError(err)
+		return category
+	}
 
-	category.Id = int(id)
 	return category
 }
 

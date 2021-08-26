@@ -2,11 +2,9 @@ package main
 
 import (
 	"github.com/go-playground/validator"
-	"github.com/julienschmidt/httprouter"
 	_ "github.com/lib/pq"
+	"golang-restful-api/app"
 	"golang-restful-api/controller"
-	"golang-restful-api/db"
-	"golang-restful-api/exception"
 	"golang-restful-api/helper"
 	"golang-restful-api/middleware"
 	"golang-restful-api/repository"
@@ -16,7 +14,7 @@ import (
 
 func main() {
 
-	dbConfig := db.Config{
+	dbConfig := app.Config{
 		User: "postgres",
 		Password: "admin",
 		DBName: "golang_restful_api",
@@ -25,20 +23,12 @@ func main() {
 		SSLMode: "disable",
 	}
 
-	db := db.NewDB(dbConfig)
+	db := app.NewDB(dbConfig)
 	validate := validator.New()
 	categoryRepository := repository.NewCategoryRepository()
 	categoryService := service.NewCategoryService(categoryRepository, db, validate)
 	categoryController := controller.NewCategoryController(categoryService)
-	router := httprouter.New()
-
-	router.GET("/api/categories", categoryController.FindAll)
-	router.GET("/api/categories/:categoryId", categoryController.FindById)
-	router.POST("/api/categories", categoryController.Create)
-	router.PUT("/api/categories/:categoryId", categoryController.Update)
-	router.DELETE("/api/categories/:categoryId", categoryController.Delete)
-
-	router.PanicHandler = exception.ErrorHandler
+	router := app.NewRouter(categoryController)
 
 	server := http.Server{
 		Addr: "localhost:3000",
