@@ -109,7 +109,7 @@ func TestUpdateCategorySuccess(t *testing.T) {
 	fmt.Println("categoryId", category.Id)
 
 	requestBody := strings.NewReader(`{"name": "Computer"}`)
-	request := httptest.NewRequest(http.MethodPut, "http://localhost:3000/api/categories" + strconv.Itoa(category.Id), requestBody)
+	request := httptest.NewRequest(http.MethodPut, "http://localhost:3000/api/categories/" + strconv.Itoa(category.Id), requestBody)
 	request.Header.Add("Content-Type", "application/json")
 	request.Header.Add("X-API-Key", "RAHASIA")
 
@@ -122,7 +122,30 @@ func TestUpdateCategorySuccess(t *testing.T) {
 }
 
 func TestUpdateCategoryFailed(t *testing.T) {
+	db := setupDBTest()
+	router := setupRouter(db)
+	truncateCategory(db)
 
+	tx, _ := db.Begin()
+	categoryRepository := repository.NewCategoryRepository()
+	category := categoryRepository.Save(context.Background(), tx, domain.Category{
+		Name: "Gadget",
+	})
+	tx.Commit()
+
+	fmt.Println("categoryId", category.Id)
+
+	requestBody := strings.NewReader(`{"name": ""}`)
+	request := httptest.NewRequest(http.MethodPut, "http://localhost:3000/api/categories/" + strconv.Itoa(category.Id), requestBody)
+	request.Header.Add("Content-Type", "application/json")
+	request.Header.Add("X-API-Key", "RAHASIA")
+
+	recorder := httptest.NewRecorder()
+
+	router.ServeHTTP(recorder, request)
+
+	response := recorder.Result()
+	assert.Equal(t, 400, response.StatusCode)
 }
 
 
