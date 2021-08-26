@@ -4,20 +4,32 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"github.com/go-playground/validator"
 	"golang-restful-api/helper"
 	"golang-restful-api/model/domain"
 )
 
 type CategoryRepositoryImpl struct {
-
+	DB *sql.DB
+	Validate *validator.Validate
 }
 
-func NewCategoryRepository() CategoryRepository {
-	return &CategoryRepositoryImpl{}
+func NewCategoryRepository(DB *sql.DB, validate *validator.Validate) CategoryRepository {
+	return &CategoryRepositoryImpl{
+		DB: DB,
+		Validate: validate,
+	}
 }
 
-func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Category {
+func (repository *CategoryRepositoryImpl) Save(ctx context.Context, category domain.Category) domain.Category {
+	err := repository.Validate.Struct(category)
+	helper.PanicIfError(err)
+
 	SQL := "insert into category(name) values ($1) returning id"
+
+	tx, err := repository.DB.Begin()
+	helper.PanicIfError(err)
+	defer helper.CommitOrRollback(tx)
 
 	rows, err := tx.QueryContext(ctx, SQL, category.Name)
 	helper.PanicIfError(err)
@@ -32,23 +44,39 @@ func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, 
 	return category
 }
 
-func (repository *CategoryRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Category {
+func (repository *CategoryRepositoryImpl) Update(ctx context.Context, category domain.Category) domain.Category {
+	err := repository.Validate.Struct(category)
+	helper.PanicIfError(err)
+
 	SQL := "update category set name = $1 where id = $2"
 
-	_, err := tx.ExecContext(ctx, SQL, category.Name, category.Id)
+	tx, err := repository.DB.Begin()
+	helper.PanicIfError(err)
+	defer helper.CommitOrRollback(tx)
+
+	_, err = tx.ExecContext(ctx, SQL, category.Name, category.Id)
 	helper.PanicIfError(err)
 
 	return category
 }
 
-func (repository *CategoryRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, category domain.Category) {
+func (repository *CategoryRepositoryImpl) Delete(ctx context.Context, category domain.Category) {
 	SQL := "delete from category where id = $1"
-	_, err := tx.ExecContext(ctx, SQL, category.Id)
+
+	tx, err := repository.DB.Begin()
+	helper.PanicIfError(err)
+	defer helper.CommitOrRollback(tx)
+
+	_, err = tx.ExecContext(ctx, SQL, category.Id)
 	helper.PanicIfError(err)
 }
 
-func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, categoryId int) (domain.Category, error) {
+func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, categoryId int) (domain.Category, error) {
 	SQL := "select id, name from category where id = $1"
+
+	tx, err := repository.DB.Begin()
+	helper.PanicIfError(err)
+	defer helper.CommitOrRollback(tx)
 
 	rows, err :=  tx.QueryContext(ctx, SQL, categoryId)
 	helper.PanicIfError(err)
@@ -64,8 +92,13 @@ func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, tx *sql.
 	}
 }
 
-func (repository *CategoryRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domain.Category {
+func (repository *CategoryRepositoryImpl) FindAll(ctx context.Context) []domain.Category {
 	SQL := "select id, name from category"
+
+	tx, err := repository.DB.Begin()
+	helper.PanicIfError(err)
+	defer helper.CommitOrRollback(tx)
+
 	rows, err := tx.QueryContext(ctx, SQL)
 	helper.PanicIfError(err)
 	defer rows.Close()

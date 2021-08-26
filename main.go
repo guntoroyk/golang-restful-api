@@ -25,8 +25,8 @@ func main() {
 
 	db := app.NewDB(dbConfig)
 	validate := validator.New()
-	categoryRepository := repository.NewCategoryRepository()
-	categoryService := service.NewCategoryService(categoryRepository, db, validate)
+	categoryRepository := repository.NewCategoryRepository(db, validate)
+	categoryService := service.NewCategoryService(categoryRepository)
 	categoryController := controller.NewCategoryController(categoryService)
 	router := app.NewRouter(categoryController)
 

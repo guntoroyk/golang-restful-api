@@ -10,26 +10,26 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "Fashion"
+  "name": "Food"
 }
 
 ### Get category by Id
-GET http://localhost:3000/api/categories/5
+GET http://localhost:3000/api/categories/7
 X-API-Key: RAHASIA
 Accept: application/json
 
 ### Update category by Id
-PUT http://localhost:3000/api/categories/5
+PUT http://localhost:3000/api/categories/7
 X-API-Key: RAHASIA
 Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "Fashion"
+  "name": "Beverages"
 }
 
 ### Delete category by Id
 
-DELETE http://localhost:3000/api/categories/6
+DELETE http://localhost:3000/api/categories/7
 X-API-Key: RAHASIA
 Accept: application/json
