@@ -2,11 +2,11 @@ package service
 
 import (
 	"context"
-	"golang-restful-api/exception"
-	"golang-restful-api/helper"
-	"golang-restful-api/model/domain"
-	"golang-restful-api/model/web"
-	"golang-restful-api/repository"
+	"github.com/guntoroyk/golang-restful-api/exception"
+	"github.com/guntoroyk/golang-restful-api/helper"
+	"github.com/guntoroyk/golang-restful-api/model/domain"
+	"github.com/guntoroyk/golang-restful-api/model/web"
+	"github.com/guntoroyk/golang-restful-api/repository"
 )
 
 type CategoryServiceImpl struct {

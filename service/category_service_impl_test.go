@@ -3,21 +3,13 @@ package service
 import (
 	"context"
 	"fmt"
-	"golang-restful-api/model/domain"
-	"golang-restful-api/model/web"
-
-	//"context"
-	//"github.com/golang/mock/gomock"
-	//"golang-restful-api/model/domain"
-	//"golang-restful-api/repository/mocks"
-	"github.com/golang/mock/gomock"
-	"golang-restful-api/repository/mocks"
 	"testing"
+
+	"github.com/golang/mock/gomock"
+	"github.com/guntoroyk/golang-restful-api/model/domain"
+	"github.com/guntoroyk/golang-restful-api/model/web"
+	"github.com/guntoroyk/golang-restful-api/repository/mocks"
 )
-
-func TestCreateCategory(t *testing.T) {
-
-}
 
 func TestCategoryServiceImpl_FindAll(t *testing.T) {
 	mockCtrl := gomock.NewController(t)

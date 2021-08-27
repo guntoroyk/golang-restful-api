@@ -5,8 +5,8 @@ import (
 	"database/sql"
 	"errors"
 	"github.com/go-playground/validator"
-	"golang-restful-api/helper"
-	"golang-restful-api/model/domain"
+	"github.com/guntoroyk/golang-restful-api/helper"
+	"github.com/guntoroyk/golang-restful-api/model/domain"
 )
 
 type CategoryRepositoryImpl struct {

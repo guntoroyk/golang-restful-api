@@ -1,15 +1,16 @@
 package main
 
 import (
-	"github.com/go-playground/validator"
-	_ "github.com/lib/pq"
-	"golang-restful-api/app"
-	"golang-restful-api/controller"
-	"golang-restful-api/helper"
-	"golang-restful-api/middleware"
-	"golang-restful-api/repository"
-	"golang-restful-api/service"
 	"net/http"
+
+	"github.com/go-playground/validator"
+	"github.com/guntoroyk/golang-restful-api/app"
+	"github.com/guntoroyk/golang-restful-api/controller"
+	"github.com/guntoroyk/golang-restful-api/helper"
+	"github.com/guntoroyk/golang-restful-api/middleware"
+	"github.com/guntoroyk/golang-restful-api/repository"
+	"github.com/guntoroyk/golang-restful-api/service"
+	_ "github.com/lib/pq"
 )
 
 func main() {

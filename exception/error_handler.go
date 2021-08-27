@@ -2,8 +2,8 @@ package exception
 
 import (
 	"github.com/go-playground/validator"
-	"golang-restful-api/helper"
-	"golang-restful-api/model/web"
+	"github.com/guntoroyk/golang-restful-api/helper"
+	"github.com/guntoroyk/golang-restful-api/model/web"
 	"net/http"
 )
 

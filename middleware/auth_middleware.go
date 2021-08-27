@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"golang-restful-api/helper"
-	"golang-restful-api/model/web"
+	"github.com/guntoroyk/golang-restful-api/helper"
+	"github.com/guntoroyk/golang-restful-api/model/web"
 	"net/http"
 )
 

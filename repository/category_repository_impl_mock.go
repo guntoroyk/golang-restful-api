@@ -3,8 +3,8 @@ package repository
 import (
 	"context"
 	"database/sql"
+	"github.com/guntoroyk/golang-restful-api/model/domain"
 	"github.com/stretchr/testify/mock"
-	"golang-restful-api/model/domain"
 )
 
 type MockCategoryRepositoryImpl struct {

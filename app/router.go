@@ -1,9 +1,9 @@
 package app
 
 import (
+	"github.com/guntoroyk/golang-restful-api/controller"
+	"github.com/guntoroyk/golang-restful-api/exception"
 	"github.com/julienschmidt/httprouter"
-	"golang-restful-api/controller"
-	"golang-restful-api/exception"
 )
 
 func NewRouter(categoryController controller.CategoryController) *httprouter.Router {

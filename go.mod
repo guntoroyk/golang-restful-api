@@ -1,4 +1,4 @@
-module golang-restful-api
+module github.com/guntoroyk/golang-restful-api
 
 go 1.14
 
