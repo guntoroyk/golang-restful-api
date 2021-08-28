@@ -1,0 +1,55 @@
+syntax="proto3";
+
+package grpc;
+option go_package="grpc/proto";
+
+message Category {
+  int32 id = 1;
+  string name = 2;
+}
+
+message CreateCategoryRequest {
+  string name = 1;
+}
+
+message CreateCategoryResponse {
+  Category category = 1;
+}
+
+message UpdateCategoryRequest {
+  Category category = 1;
+}
+
+message UpdateCategoryResponse {
+  Category category = 1;
+}
+
+message GetCategoryRequest {
+  int32 category_id = 1;
+}
+
+message GetCategoryResponse {
+  Category category = 1;
+}
+
+message GetAllCategoryRequest {}
+
+message GetAllCategoryResponse {
+  repeated Category categories = 1;
+}
+
+message DeleteCategoryRequest {
+  int32 category_id = 1;
+}
+
+message DeleteCategoryResponse {
+  Category category = 1;
+}
+
+service CategoryService {
+  rpc CreateCategory (CreateCategoryRequest) returns (CreateCategoryResponse);
+  rpc UpdateCategory (UpdateCategoryRequest) returns (UpdateCategoryResponse);
+  rpc GetCategory (GetCategoryRequest) returns (GetCategoryResponse);
+  rpc GetAllCategory (GetAllCategoryRequest) returns (GetAllCategoryResponse);
+  rpc DeleteCategory (DeleteCategoryRequest) returns (DeleteCategoryResponse);
+}
