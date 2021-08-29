@@ -30,7 +30,6 @@ func getAllCategory(c proto.CategoryServiceClient) {
 	log.Printf("Categories: %v\n", res)
 }
 
-
 func getCategory(c proto.CategoryServiceClient) {
 	req := &proto.GetCategoryRequest{
 		CategoryId: 1,

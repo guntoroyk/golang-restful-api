@@ -8,12 +8,12 @@ import (
 )
 
 type Config struct {
-	User string
+	User     string
 	Password string
-	DBName string
-	Host string
-	Port int
-	SSLMode string
+	DBName   string
+	Host     string
+	Port     int
+	SSLMode  string
 }
 
 const (

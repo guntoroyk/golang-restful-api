@@ -16,12 +16,12 @@ import (
 func main() {
 
 	dbConfig := app.Config{
-		User: "postgres",
+		User:     "postgres",
 		Password: "admin",
-		DBName: "golang_restful_api",
-		Port: 5433,
-		Host: "localhost",
-		SSLMode: "disable",
+		DBName:   "golang_restful_api",
+		Port:     5433,
+		Host:     "localhost",
+		SSLMode:  "disable",
 	}
 
 	db := app.NewDB(dbConfig)
@@ -32,7 +32,7 @@ func main() {
 	router := app.NewRouter(categoryController)
 
 	server := http.Server{
-		Addr: "localhost:3000",
+		Addr:    "localhost:3000",
 		Handler: middleware.NewAuthMiddleware(router),
 	}
 

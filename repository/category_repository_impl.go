@@ -10,13 +10,13 @@ import (
 )
 
 type CategoryRepositoryImpl struct {
-	DB *sql.DB
+	DB       *sql.DB
 	Validate *validator.Validate
 }
 
 func NewCategoryRepository(DB *sql.DB, validate *validator.Validate) CategoryRepository {
 	return &CategoryRepositoryImpl{
-		DB: DB,
+		DB:       DB,
 		Validate: validate,
 	}
 }
@@ -78,7 +78,7 @@ func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, category
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	rows, err :=  tx.QueryContext(ctx, SQL, categoryId)
+	rows, err := tx.QueryContext(ctx, SQL, categoryId)
 	helper.PanicIfError(err)
 	defer rows.Close()
 

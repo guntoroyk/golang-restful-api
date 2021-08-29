@@ -7,11 +7,11 @@ import (
 	"net/http"
 )
 
-func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interface{})  {
+func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interface{}) {
 	if notFoundErr(writer, request, err) {
 		return
 	}
-	
+
 	if validationError(writer, request, err) {
 		return
 	}
@@ -23,9 +23,9 @@ func internalServerError(writer http.ResponseWriter, request *http.Request, err 
 	writer.WriteHeader(http.StatusInternalServerError)
 
 	webResponse := web.WebResponse{
-		Code: http.StatusInternalServerError,
+		Code:   http.StatusInternalServerError,
 		Status: "INTERNAL SERVER ERROR",
-		Data: err,
+		Data:   err,
 	}
 
 	helper.WriteToResponseBody(writer, webResponse)
@@ -39,9 +39,9 @@ func notFoundErr(writer http.ResponseWriter, request *http.Request, err interfac
 		writer.WriteHeader(http.StatusNotFound)
 
 		webResponse := web.WebResponse{
-			Code: http.StatusNotFound,
+			Code:   http.StatusNotFound,
 			Status: "NOT FOUND",
-			Data: exception.Error,
+			Data:   exception.Error,
 		}
 
 		helper.WriteToResponseBody(writer, webResponse)
@@ -52,7 +52,7 @@ func notFoundErr(writer http.ResponseWriter, request *http.Request, err interfac
 	}
 }
 
-func validationError(writer http.ResponseWriter, request *http.Request, err interface{}) bool  {
+func validationError(writer http.ResponseWriter, request *http.Request, err interface{}) bool {
 	exception, ok := err.(validator.ValidationErrors)
 
 	if ok {
@@ -60,9 +60,9 @@ func validationError(writer http.ResponseWriter, request *http.Request, err inte
 		writer.WriteHeader(http.StatusBadRequest)
 
 		webResponse := web.WebResponse{
-			Code: http.StatusBadRequest,
+			Code:   http.StatusBadRequest,
 			Status: "BAD REQUEST",
-			Data: exception.Error(),
+			Data:   exception.Error(),
 		}
 
 		helper.WriteToResponseBody(writer, webResponse)

@@ -24,7 +24,7 @@ func (middleware *AuthMiddleware) ServeHTTP(writer http.ResponseWriter, request 
 		writer.WriteHeader(http.StatusUnauthorized)
 
 		webResponse := web.WebResponse{
-			Code: http.StatusUnauthorized,
+			Code:   http.StatusUnauthorized,
 			Status: "UNAUTHORIZED",
 		}
 

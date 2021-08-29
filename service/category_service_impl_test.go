@@ -16,10 +16,10 @@ func TestCategoryServiceImpl_FindAll(t *testing.T) {
 	defer mockCtrl.Finish()
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
 	mockCategoryRepo.EXPECT().FindAll(context.Background()).Return([]domain.Category{{
-		Id: 1,
+		Id:   1,
 		Name: "Computer",
 	}, {
-		Id: 2,
+		Id:   2,
 		Name: "Gadget",
 	}})
 
@@ -31,7 +31,7 @@ func TestCategoryServiceImpl_FindAll(t *testing.T) {
 	got := len(categories)
 	want := 2
 	if got != want {
-		t.Errorf("got %d want %d", got, want )
+		t.Errorf("got %d want %d", got, want)
 	}
 }
 
@@ -41,7 +41,7 @@ func TestCategoryServiceImpl_FindById(t *testing.T) {
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
 
 	category := domain.Category{
-		Id: 1,
+		Id:   1,
 		Name: "Computer",
 	}
 
@@ -56,7 +56,7 @@ func TestCategoryServiceImpl_FindById(t *testing.T) {
 	want := web.CategoryResponse{Id: 1, Name: "Computer"}
 
 	if got != want {
-		t.Errorf("got %q want %q", got, want )
+		t.Errorf("got %q want %q", got, want)
 	}
 }
 
@@ -80,7 +80,7 @@ func TestCategoryServiceImpl_Create(t *testing.T) {
 	want := web.CategoryResponse{Id: 1, Name: "Computer"}
 
 	if got != want {
-		t.Errorf("got %q want %q", got, want )
+		t.Errorf("got %q want %q", got, want)
 	}
 }
 
@@ -90,7 +90,7 @@ func TestCategoryServiceImpl_Delete(t *testing.T) {
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
 
 	category := domain.Category{
-		Id: 1,
+		Id:   1,
 		Name: "Computer",
 	}
 
@@ -116,14 +116,14 @@ func TestCategoryServiceImpl_Update(t *testing.T) {
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
 
 	oldCategory := domain.Category{
-		Id: 1,
+		Id:   1,
 		Name: "Computer",
 	}
 
 	mockCategoryRepo.EXPECT().FindById(context.Background(), 1).Return(oldCategory, nil)
 
 	newCategory := domain.Category{
-		Id: 1,
+		Id:   1,
 		Name: "Gadget",
 	}
 
@@ -140,6 +140,6 @@ func TestCategoryServiceImpl_Update(t *testing.T) {
 	want := web.CategoryResponse{Id: 1, Name: "Gadget"}
 
 	if got != want {
-		t.Errorf("got %q want %q", got, want )
+		t.Errorf("got %q want %q", got, want)
 	}
 }

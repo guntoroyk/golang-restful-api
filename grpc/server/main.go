@@ -12,7 +12,6 @@ import (
 	"github.com/guntoroyk/golang-restful-api/repository"
 	_ "github.com/lib/pq"
 	"google.golang.org/grpc"
-
 )
 
 type server struct {
@@ -48,7 +47,7 @@ func (s server) GetAllCategory(ctx context.Context, request *proto.GetAllCategor
 
 	for _, category := range categoriesRes {
 		categories = append(categories, &proto.Category{
-			Id: int32(category.Id),
+			Id:   int32(category.Id),
 			Name: category.Name,
 		})
 	}
@@ -68,19 +67,18 @@ func main() {
 	fmt.Println("GRPC Server starting...")
 
 	dbConfig := app.Config{
-		User: "postgres",
+		User:     "postgres",
 		Password: "admin",
-		DBName: "golang_restful_api",
-		Port: 5433,
-		Host: "localhost",
-		SSLMode: "disable",
+		DBName:   "golang_restful_api",
+		Port:     5433,
+		Host:     "localhost",
+		SSLMode:  "disable",
 	}
 
 	db := app.NewDB(dbConfig)
 	validate := validator.New()
 	categoryRepository := repository.NewCategoryRepository(db, validate)
 	//categoryService := service.NewCategoryService(categoryRepository)
-
 
 	list, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {
