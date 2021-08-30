@@ -12,24 +12,12 @@ message CreateCategoryRequest {
   string name = 1;
 }
 
-message CreateCategoryResponse {
-  Category category = 1;
-}
-
 message UpdateCategoryRequest {
-  Category category = 1;
-}
-
-message UpdateCategoryResponse {
   Category category = 1;
 }
 
 message GetCategoryRequest {
   int32 category_id = 1;
-}
-
-message GetCategoryResponse {
-  Category category = 1;
 }
 
 message GetAllCategoryRequest {}
@@ -43,13 +31,17 @@ message DeleteCategoryRequest {
 }
 
 message DeleteCategoryResponse {
+  string message = 1;
+}
+
+message CategoryResponse {
   Category category = 1;
 }
 
 service CategoryService {
-  rpc CreateCategory (CreateCategoryRequest) returns (CreateCategoryResponse);
-  rpc UpdateCategory (UpdateCategoryRequest) returns (UpdateCategoryResponse);
-  rpc GetCategory (GetCategoryRequest) returns (GetCategoryResponse);
+  rpc CreateCategory (CreateCategoryRequest) returns (CategoryResponse);
+  rpc UpdateCategory (UpdateCategoryRequest) returns (CategoryResponse);
+  rpc GetCategory (GetCategoryRequest) returns (CategoryResponse);
   rpc GetAllCategory (GetAllCategoryRequest) returns (GetAllCategoryResponse);
   rpc DeleteCategory (DeleteCategoryRequest) returns (DeleteCategoryResponse);
 }

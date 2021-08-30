@@ -126,53 +126,6 @@ func (x *CreateCategoryRequest) GetName() string {
 	return ""
 }
 
-type CreateCategoryResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Category *Category `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"`
-}
-
-func (x *CreateCategoryResponse) Reset() {
-	*x = CreateCategoryResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_grpc_proto_category_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *CreateCategoryResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateCategoryResponse) ProtoMessage() {}
-
-func (x *CreateCategoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_proto_category_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateCategoryResponse.ProtoReflect.Descriptor instead.
-func (*CreateCategoryResponse) Descriptor() ([]byte, []int) {
-	return file_grpc_proto_category_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *CreateCategoryResponse) GetCategory() *Category {
-	if x != nil {
-		return x.Category
-	}
-	return nil
-}
-
 type UpdateCategoryRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -184,7 +137,7 @@ type UpdateCategoryRequest struct {
 func (x *UpdateCategoryRequest) Reset() {
 	*x = UpdateCategoryRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_grpc_proto_category_proto_msgTypes[3]
+		mi := &file_grpc_proto_category_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -197,7 +150,7 @@ func (x *UpdateCategoryRequest) String() string {
 func (*UpdateCategoryRequest) ProtoMessage() {}
 
 func (x *UpdateCategoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_proto_category_proto_msgTypes[3]
+	mi := &file_grpc_proto_category_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -210,57 +163,10 @@ func (x *UpdateCategoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCategoryRequest.ProtoReflect.Descriptor instead.
 func (*UpdateCategoryRequest) Descriptor() ([]byte, []int) {
-	return file_grpc_proto_category_proto_rawDescGZIP(), []int{3}
+	return file_grpc_proto_category_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UpdateCategoryRequest) GetCategory() *Category {
-	if x != nil {
-		return x.Category
-	}
-	return nil
-}
-
-type UpdateCategoryResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Category *Category `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"`
-}
-
-func (x *UpdateCategoryResponse) Reset() {
-	*x = UpdateCategoryResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_grpc_proto_category_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *UpdateCategoryResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateCategoryResponse) ProtoMessage() {}
-
-func (x *UpdateCategoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_proto_category_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateCategoryResponse.ProtoReflect.Descriptor instead.
-func (*UpdateCategoryResponse) Descriptor() ([]byte, []int) {
-	return file_grpc_proto_category_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *UpdateCategoryResponse) GetCategory() *Category {
 	if x != nil {
 		return x.Category
 	}
@@ -278,7 +184,7 @@ type GetCategoryRequest struct {
 func (x *GetCategoryRequest) Reset() {
 	*x = GetCategoryRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_grpc_proto_category_proto_msgTypes[5]
+		mi := &file_grpc_proto_category_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -291,7 +197,7 @@ func (x *GetCategoryRequest) String() string {
 func (*GetCategoryRequest) ProtoMessage() {}
 
 func (x *GetCategoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_proto_category_proto_msgTypes[5]
+	mi := &file_grpc_proto_category_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -304,7 +210,7 @@ func (x *GetCategoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCategoryRequest.ProtoReflect.Descriptor instead.
 func (*GetCategoryRequest) Descriptor() ([]byte, []int) {
-	return file_grpc_proto_category_proto_rawDescGZIP(), []int{5}
+	return file_grpc_proto_category_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetCategoryRequest) GetCategoryId() int32 {
@@ -312,53 +218,6 @@ func (x *GetCategoryRequest) GetCategoryId() int32 {
 		return x.CategoryId
 	}
 	return 0
-}
-
-type GetCategoryResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Category *Category `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"`
-}
-
-func (x *GetCategoryResponse) Reset() {
-	*x = GetCategoryResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_grpc_proto_category_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetCategoryResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetCategoryResponse) ProtoMessage() {}
-
-func (x *GetCategoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_proto_category_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetCategoryResponse.ProtoReflect.Descriptor instead.
-func (*GetCategoryResponse) Descriptor() ([]byte, []int) {
-	return file_grpc_proto_category_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *GetCategoryResponse) GetCategory() *Category {
-	if x != nil {
-		return x.Category
-	}
-	return nil
 }
 
 type GetAllCategoryRequest struct {
@@ -370,7 +229,7 @@ type GetAllCategoryRequest struct {
 func (x *GetAllCategoryRequest) Reset() {
 	*x = GetAllCategoryRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_grpc_proto_category_proto_msgTypes[7]
+		mi := &file_grpc_proto_category_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -383,7 +242,7 @@ func (x *GetAllCategoryRequest) String() string {
 func (*GetAllCategoryRequest) ProtoMessage() {}
 
 func (x *GetAllCategoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_proto_category_proto_msgTypes[7]
+	mi := &file_grpc_proto_category_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -396,7 +255,7 @@ func (x *GetAllCategoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllCategoryRequest.ProtoReflect.Descriptor instead.
 func (*GetAllCategoryRequest) Descriptor() ([]byte, []int) {
-	return file_grpc_proto_category_proto_rawDescGZIP(), []int{7}
+	return file_grpc_proto_category_proto_rawDescGZIP(), []int{4}
 }
 
 type GetAllCategoryResponse struct {
@@ -410,7 +269,7 @@ type GetAllCategoryResponse struct {
 func (x *GetAllCategoryResponse) Reset() {
 	*x = GetAllCategoryResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_grpc_proto_category_proto_msgTypes[8]
+		mi := &file_grpc_proto_category_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -423,7 +282,7 @@ func (x *GetAllCategoryResponse) String() string {
 func (*GetAllCategoryResponse) ProtoMessage() {}
 
 func (x *GetAllCategoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_proto_category_proto_msgTypes[8]
+	mi := &file_grpc_proto_category_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -436,7 +295,7 @@ func (x *GetAllCategoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllCategoryResponse.ProtoReflect.Descriptor instead.
 func (*GetAllCategoryResponse) Descriptor() ([]byte, []int) {
-	return file_grpc_proto_category_proto_rawDescGZIP(), []int{8}
+	return file_grpc_proto_category_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetAllCategoryResponse) GetCategories() []*Category {
@@ -457,7 +316,7 @@ type DeleteCategoryRequest struct {
 func (x *DeleteCategoryRequest) Reset() {
 	*x = DeleteCategoryRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_grpc_proto_category_proto_msgTypes[9]
+		mi := &file_grpc_proto_category_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -470,7 +329,7 @@ func (x *DeleteCategoryRequest) String() string {
 func (*DeleteCategoryRequest) ProtoMessage() {}
 
 func (x *DeleteCategoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_proto_category_proto_msgTypes[9]
+	mi := &file_grpc_proto_category_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -483,7 +342,7 @@ func (x *DeleteCategoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCategoryRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCategoryRequest) Descriptor() ([]byte, []int) {
-	return file_grpc_proto_category_proto_rawDescGZIP(), []int{9}
+	return file_grpc_proto_category_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DeleteCategoryRequest) GetCategoryId() int32 {
@@ -498,13 +357,13 @@ type DeleteCategoryResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Category *Category `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"`
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 }
 
 func (x *DeleteCategoryResponse) Reset() {
 	*x = DeleteCategoryResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_grpc_proto_category_proto_msgTypes[10]
+		mi := &file_grpc_proto_category_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -517,7 +376,7 @@ func (x *DeleteCategoryResponse) String() string {
 func (*DeleteCategoryResponse) ProtoMessage() {}
 
 func (x *DeleteCategoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_proto_category_proto_msgTypes[10]
+	mi := &file_grpc_proto_category_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -530,10 +389,57 @@ func (x *DeleteCategoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCategoryResponse.ProtoReflect.Descriptor instead.
 func (*DeleteCategoryResponse) Descriptor() ([]byte, []int) {
-	return file_grpc_proto_category_proto_rawDescGZIP(), []int{10}
+	return file_grpc_proto_category_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *DeleteCategoryResponse) GetCategory() *Category {
+func (x *DeleteCategoryResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type CategoryResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Category *Category `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"`
+}
+
+func (x *CategoryResponse) Reset() {
+	*x = CategoryResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_grpc_proto_category_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CategoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryResponse) ProtoMessage() {}
+
+func (x *CategoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_proto_category_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryResponse.ProtoReflect.Descriptor instead.
+func (*CategoryResponse) Descriptor() ([]byte, []int) {
+	return file_grpc_proto_category_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *CategoryResponse) GetCategory() *Category {
 	if x != nil {
 		return x.Category
 	}
@@ -550,56 +456,45 @@ var file_grpc_proto_category_proto_rawDesc = []byte{
 	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d,
 	0x65, 0x22, 0x2b, 0x0a, 0x15, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67,
 	0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61,
-	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x44,
-	0x0a, 0x16, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x08, 0x63, 0x61, 0x74, 0x65,
-	0x67, 0x6f, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x67, 0x72, 0x70,
-	0x63, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x08, 0x63, 0x61, 0x74, 0x65,
-	0x67, 0x6f, 0x72, 0x79, 0x22, 0x43, 0x0a, 0x15, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x61,
-	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2a, 0x0a,
-	0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x0e, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52,
-	0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x22, 0x44, 0x0a, 0x16, 0x55, 0x70, 0x64,
-	0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x22,
-	0x35, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
-	0x79, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x63, 0x61, 0x74, 0x65,
-	0x67, 0x6f, 0x72, 0x79, 0x49, 0x64, 0x22, 0x41, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x43, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a,
-	0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x0e, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52,
-	0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x22, 0x17, 0x0a, 0x15, 0x47, 0x65, 0x74,
-	0x41, 0x6c, 0x6c, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x22, 0x48, 0x0a, 0x16, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x6c, 0x43, 0x61, 0x74, 0x65,
-	0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2e, 0x0a, 0x0a,
-	0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
-	0x32, 0x0e, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
-	0x52, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x22, 0x38, 0x0a, 0x15,
-	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
-	0x79, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x63, 0x61, 0x74, 0x65,
-	0x67, 0x6f, 0x72, 0x79, 0x49, 0x64, 0x22, 0x44, 0x0a, 0x16, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
-	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x2a, 0x0a, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
-	0x72, 0x79, 0x52, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x32, 0x89, 0x03, 0x0a,
-	0x0f, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x12, 0x4b, 0x0a, 0x0e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
-	0x72, 0x79, 0x12, 0x1b, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
-	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x1c, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4b, 0x0a,
-	0x0e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12,
-	0x1b, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x67,
-	0x72, 0x70, 0x63, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
-	0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x42, 0x0a, 0x0b, 0x47, 0x65,
-	0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x18, 0x2e, 0x67, 0x72, 0x70, 0x63,
-	0x2e, 0x47, 0x65, 0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x61,
+	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x43,
+	0x0a, 0x15, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2a, 0x0a, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67,
+	0x6f, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x67, 0x72, 0x70, 0x63,
+	0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67,
+	0x6f, 0x72, 0x79, 0x22, 0x35, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
+	0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x61, 0x74,
+	0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a,
+	0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x49, 0x64, 0x22, 0x17, 0x0a, 0x15, 0x47, 0x65,
+	0x74, 0x41, 0x6c, 0x6c, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x22, 0x48, 0x0a, 0x16, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x6c, 0x43, 0x61, 0x74,
+	0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2e, 0x0a,
+	0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x0e, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x52, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x22, 0x38, 0x0a,
+	0x15, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f,
+	0x72, 0x79, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x63, 0x61, 0x74,
+	0x65, 0x67, 0x6f, 0x72, 0x79, 0x49, 0x64, 0x22, 0x32, 0x0a, 0x16, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x3e, 0x0a, 0x10, 0x43,
+	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x2a, 0x0a, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x0e, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x52, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x32, 0xfa, 0x02, 0x0a, 0x0f,
+	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
+	0x45, 0x0a, 0x0e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x12, 0x1b, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43,
+	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16,
+	0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x45, 0x0a, 0x0e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x1b, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e,
+	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x61, 0x74,
+	0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3f, 0x0a,
+	0x0b, 0x47, 0x65, 0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x18, 0x2e, 0x67,
+	0x72, 0x70, 0x63, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x61,
 	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4b,
 	0x0a, 0x0e, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x6c, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
 	0x12, 0x1b, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x6c, 0x43, 0x61,
@@ -626,42 +521,37 @@ func file_grpc_proto_category_proto_rawDescGZIP() []byte {
 	return file_grpc_proto_category_proto_rawDescData
 }
 
-var file_grpc_proto_category_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_grpc_proto_category_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_grpc_proto_category_proto_goTypes = []interface{}{
 	(*Category)(nil),               // 0: grpc.Category
 	(*CreateCategoryRequest)(nil),  // 1: grpc.CreateCategoryRequest
-	(*CreateCategoryResponse)(nil), // 2: grpc.CreateCategoryResponse
-	(*UpdateCategoryRequest)(nil),  // 3: grpc.UpdateCategoryRequest
-	(*UpdateCategoryResponse)(nil), // 4: grpc.UpdateCategoryResponse
-	(*GetCategoryRequest)(nil),     // 5: grpc.GetCategoryRequest
-	(*GetCategoryResponse)(nil),    // 6: grpc.GetCategoryResponse
-	(*GetAllCategoryRequest)(nil),  // 7: grpc.GetAllCategoryRequest
-	(*GetAllCategoryResponse)(nil), // 8: grpc.GetAllCategoryResponse
-	(*DeleteCategoryRequest)(nil),  // 9: grpc.DeleteCategoryRequest
-	(*DeleteCategoryResponse)(nil), // 10: grpc.DeleteCategoryResponse
+	(*UpdateCategoryRequest)(nil),  // 2: grpc.UpdateCategoryRequest
+	(*GetCategoryRequest)(nil),     // 3: grpc.GetCategoryRequest
+	(*GetAllCategoryRequest)(nil),  // 4: grpc.GetAllCategoryRequest
+	(*GetAllCategoryResponse)(nil), // 5: grpc.GetAllCategoryResponse
+	(*DeleteCategoryRequest)(nil),  // 6: grpc.DeleteCategoryRequest
+	(*DeleteCategoryResponse)(nil), // 7: grpc.DeleteCategoryResponse
+	(*CategoryResponse)(nil),       // 8: grpc.CategoryResponse
 }
 var file_grpc_proto_category_proto_depIdxs = []int32{
-	0,  // 0: grpc.CreateCategoryResponse.category:type_name -> grpc.Category
-	0,  // 1: grpc.UpdateCategoryRequest.category:type_name -> grpc.Category
-	0,  // 2: grpc.UpdateCategoryResponse.category:type_name -> grpc.Category
-	0,  // 3: grpc.GetCategoryResponse.category:type_name -> grpc.Category
-	0,  // 4: grpc.GetAllCategoryResponse.categories:type_name -> grpc.Category
-	0,  // 5: grpc.DeleteCategoryResponse.category:type_name -> grpc.Category
-	1,  // 6: grpc.CategoryService.CreateCategory:input_type -> grpc.CreateCategoryRequest
-	3,  // 7: grpc.CategoryService.UpdateCategory:input_type -> grpc.UpdateCategoryRequest
-	5,  // 8: grpc.CategoryService.GetCategory:input_type -> grpc.GetCategoryRequest
-	7,  // 9: grpc.CategoryService.GetAllCategory:input_type -> grpc.GetAllCategoryRequest
-	9,  // 10: grpc.CategoryService.DeleteCategory:input_type -> grpc.DeleteCategoryRequest
-	2,  // 11: grpc.CategoryService.CreateCategory:output_type -> grpc.CreateCategoryResponse
-	4,  // 12: grpc.CategoryService.UpdateCategory:output_type -> grpc.UpdateCategoryResponse
-	6,  // 13: grpc.CategoryService.GetCategory:output_type -> grpc.GetCategoryResponse
-	8,  // 14: grpc.CategoryService.GetAllCategory:output_type -> grpc.GetAllCategoryResponse
-	10, // 15: grpc.CategoryService.DeleteCategory:output_type -> grpc.DeleteCategoryResponse
-	11, // [11:16] is the sub-list for method output_type
-	6,  // [6:11] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	0, // 0: grpc.UpdateCategoryRequest.category:type_name -> grpc.Category
+	0, // 1: grpc.GetAllCategoryResponse.categories:type_name -> grpc.Category
+	0, // 2: grpc.CategoryResponse.category:type_name -> grpc.Category
+	1, // 3: grpc.CategoryService.CreateCategory:input_type -> grpc.CreateCategoryRequest
+	2, // 4: grpc.CategoryService.UpdateCategory:input_type -> grpc.UpdateCategoryRequest
+	3, // 5: grpc.CategoryService.GetCategory:input_type -> grpc.GetCategoryRequest
+	4, // 6: grpc.CategoryService.GetAllCategory:input_type -> grpc.GetAllCategoryRequest
+	6, // 7: grpc.CategoryService.DeleteCategory:input_type -> grpc.DeleteCategoryRequest
+	8, // 8: grpc.CategoryService.CreateCategory:output_type -> grpc.CategoryResponse
+	8, // 9: grpc.CategoryService.UpdateCategory:output_type -> grpc.CategoryResponse
+	8, // 10: grpc.CategoryService.GetCategory:output_type -> grpc.CategoryResponse
+	5, // 11: grpc.CategoryService.GetAllCategory:output_type -> grpc.GetAllCategoryResponse
+	7, // 12: grpc.CategoryService.DeleteCategory:output_type -> grpc.DeleteCategoryResponse
+	8, // [8:13] is the sub-list for method output_type
+	3, // [3:8] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_grpc_proto_category_proto_init() }
@@ -695,18 +585,6 @@ func file_grpc_proto_category_proto_init() {
 			}
 		}
 		file_grpc_proto_category_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateCategoryResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_grpc_proto_category_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateCategoryRequest); i {
 			case 0:
 				return &v.state
@@ -718,19 +596,7 @@ func file_grpc_proto_category_proto_init() {
 				return nil
 			}
 		}
-		file_grpc_proto_category_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateCategoryResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_grpc_proto_category_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_grpc_proto_category_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetCategoryRequest); i {
 			case 0:
 				return &v.state
@@ -742,19 +608,7 @@ func file_grpc_proto_category_proto_init() {
 				return nil
 			}
 		}
-		file_grpc_proto_category_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetCategoryResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_grpc_proto_category_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_grpc_proto_category_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetAllCategoryRequest); i {
 			case 0:
 				return &v.state
@@ -766,7 +620,7 @@ func file_grpc_proto_category_proto_init() {
 				return nil
 			}
 		}
-		file_grpc_proto_category_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_grpc_proto_category_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetAllCategoryResponse); i {
 			case 0:
 				return &v.state
@@ -778,7 +632,7 @@ func file_grpc_proto_category_proto_init() {
 				return nil
 			}
 		}
-		file_grpc_proto_category_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_grpc_proto_category_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteCategoryRequest); i {
 			case 0:
 				return &v.state
@@ -790,8 +644,20 @@ func file_grpc_proto_category_proto_init() {
 				return nil
 			}
 		}
-		file_grpc_proto_category_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_grpc_proto_category_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteCategoryResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_grpc_proto_category_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CategoryResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -809,7 +675,7 @@ func file_grpc_proto_category_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_grpc_proto_category_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -835,9 +701,9 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type CategoryServiceClient interface {
-	CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*CreateCategoryResponse, error)
-	UpdateCategory(ctx context.Context, in *UpdateCategoryRequest, opts ...grpc.CallOption) (*UpdateCategoryResponse, error)
-	GetCategory(ctx context.Context, in *GetCategoryRequest, opts ...grpc.CallOption) (*GetCategoryResponse, error)
+	CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*CategoryResponse, error)
+	UpdateCategory(ctx context.Context, in *UpdateCategoryRequest, opts ...grpc.CallOption) (*CategoryResponse, error)
+	GetCategory(ctx context.Context, in *GetCategoryRequest, opts ...grpc.CallOption) (*CategoryResponse, error)
 	GetAllCategory(ctx context.Context, in *GetAllCategoryRequest, opts ...grpc.CallOption) (*GetAllCategoryResponse, error)
 	DeleteCategory(ctx context.Context, in *DeleteCategoryRequest, opts ...grpc.CallOption) (*DeleteCategoryResponse, error)
 }
@@ -850,8 +716,8 @@ func NewCategoryServiceClient(cc grpc.ClientConnInterface) CategoryServiceClient
 	return &categoryServiceClient{cc}
 }
 
-func (c *categoryServiceClient) CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*CreateCategoryResponse, error) {
-	out := new(CreateCategoryResponse)
+func (c *categoryServiceClient) CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*CategoryResponse, error) {
+	out := new(CategoryResponse)
 	err := c.cc.Invoke(ctx, "/grpc.CategoryService/CreateCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -859,8 +725,8 @@ func (c *categoryServiceClient) CreateCategory(ctx context.Context, in *CreateCa
 	return out, nil
 }
 
-func (c *categoryServiceClient) UpdateCategory(ctx context.Context, in *UpdateCategoryRequest, opts ...grpc.CallOption) (*UpdateCategoryResponse, error) {
-	out := new(UpdateCategoryResponse)
+func (c *categoryServiceClient) UpdateCategory(ctx context.Context, in *UpdateCategoryRequest, opts ...grpc.CallOption) (*CategoryResponse, error) {
+	out := new(CategoryResponse)
 	err := c.cc.Invoke(ctx, "/grpc.CategoryService/UpdateCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -868,8 +734,8 @@ func (c *categoryServiceClient) UpdateCategory(ctx context.Context, in *UpdateCa
 	return out, nil
 }
 
-func (c *categoryServiceClient) GetCategory(ctx context.Context, in *GetCategoryRequest, opts ...grpc.CallOption) (*GetCategoryResponse, error) {
-	out := new(GetCategoryResponse)
+func (c *categoryServiceClient) GetCategory(ctx context.Context, in *GetCategoryRequest, opts ...grpc.CallOption) (*CategoryResponse, error) {
+	out := new(CategoryResponse)
 	err := c.cc.Invoke(ctx, "/grpc.CategoryService/GetCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -897,9 +763,9 @@ func (c *categoryServiceClient) DeleteCategory(ctx context.Context, in *DeleteCa
 
 // CategoryServiceServer is the server API for CategoryService service.
 type CategoryServiceServer interface {
-	CreateCategory(context.Context, *CreateCategoryRequest) (*CreateCategoryResponse, error)
-	UpdateCategory(context.Context, *UpdateCategoryRequest) (*UpdateCategoryResponse, error)
-	GetCategory(context.Context, *GetCategoryRequest) (*GetCategoryResponse, error)
+	CreateCategory(context.Context, *CreateCategoryRequest) (*CategoryResponse, error)
+	UpdateCategory(context.Context, *UpdateCategoryRequest) (*CategoryResponse, error)
+	GetCategory(context.Context, *GetCategoryRequest) (*CategoryResponse, error)
 	GetAllCategory(context.Context, *GetAllCategoryRequest) (*GetAllCategoryResponse, error)
 	DeleteCategory(context.Context, *DeleteCategoryRequest) (*DeleteCategoryResponse, error)
 }
@@ -908,13 +774,13 @@ type CategoryServiceServer interface {
 type UnimplementedCategoryServiceServer struct {
 }
 
-func (*UnimplementedCategoryServiceServer) CreateCategory(context.Context, *CreateCategoryRequest) (*CreateCategoryResponse, error) {
+func (*UnimplementedCategoryServiceServer) CreateCategory(context.Context, *CreateCategoryRequest) (*CategoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCategory not implemented")
 }
-func (*UnimplementedCategoryServiceServer) UpdateCategory(context.Context, *UpdateCategoryRequest) (*UpdateCategoryResponse, error) {
+func (*UnimplementedCategoryServiceServer) UpdateCategory(context.Context, *UpdateCategoryRequest) (*CategoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCategory not implemented")
 }
-func (*UnimplementedCategoryServiceServer) GetCategory(context.Context, *GetCategoryRequest) (*GetCategoryResponse, error) {
+func (*UnimplementedCategoryServiceServer) GetCategory(context.Context, *GetCategoryRequest) (*CategoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCategory not implemented")
 }
 func (*UnimplementedCategoryServiceServer) GetAllCategory(context.Context, *GetAllCategoryRequest) (*GetAllCategoryResponse, error) {

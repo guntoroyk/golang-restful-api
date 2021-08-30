@@ -148,7 +148,7 @@ func TestCategoryServiceImpl_Update(t *testing.T) {
 
 func TestCategoryServiceImpl_Create1(t *testing.T) {
 	type fields struct {
-		CategoryRepository *mocks.MockCategoryRepository
+		CategoryRepository repository.CategoryRepository
 	}
 	type args struct {
 		ctx     context.Context
@@ -194,7 +194,7 @@ func TestCategoryServiceImpl_Create1(t *testing.T) {
 
 func TestCategoryServiceImpl_Update1(t *testing.T) {
 	type fields struct {
-		CategoryRepository *mocks.MockCategoryRepository
+		CategoryRepository repository.CategoryRepository
 	}
 	type args struct {
 		ctx     context.Context
@@ -249,7 +249,7 @@ func TestCategoryServiceImpl_Update1(t *testing.T) {
 
 func TestCategoryServiceImpl_Delete1(t *testing.T) {
 	type fields struct {
-		CategoryRepository *mocks.MockCategoryRepository
+		CategoryRepository repository.CategoryRepository
 	}
 	type args struct {
 		ctx        context.Context
@@ -333,7 +333,7 @@ func TestCategoryServiceImpl_FindById1(t *testing.T) {
 
 func TestCategoryServiceImpl_FindAll1(t *testing.T) {
 	type fields struct {
-		CategoryRepository *mocks.MockCategoryRepository
+		CategoryRepository repository.CategoryRepository
 	}
 	type args struct {
 		ctx context.Context
@@ -346,7 +346,7 @@ func TestCategoryServiceImpl_FindAll1(t *testing.T) {
 	category := domain.Category{Id: 1, Name: "Computer"}
 	categories := []domain.Category{category}
 
-	mockCategoryRepo.EXPECT().FindAll(gomock.Any()).Return(categories)
+	mockCategoryRepo.EXPECT().FindAll(gomock.Any()).Times(1).Return(categories)
 
 	tests := []struct {
 		name   string

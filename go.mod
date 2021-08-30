@@ -3,6 +3,7 @@ module github.com/guntoroyk/golang-restful-api
 go 1.14
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/golang/mock v1.6.0

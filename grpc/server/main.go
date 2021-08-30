@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/guntoroyk/golang-restful-api/model/web"
+	"github.com/guntoroyk/golang-restful-api/service"
 	"log"
 	"net"
 
@@ -15,24 +17,34 @@ import (
 )
 
 type server struct {
-	categoryRepository repository.CategoryRepository
+	categoryService service.CategoryService
 }
 
-func (s server) CreateCategory(ctx context.Context, request *proto.CreateCategoryRequest) (*proto.CreateCategoryResponse, error) {
-	panic("implement me")
+func (s server) CreateCategory(ctx context.Context, request *proto.CreateCategoryRequest) (*proto.CategoryResponse, error) {
+	categoryCreated := s.categoryService.Create(ctx, web.CategoryCreateRequest{Name: request.Name})
+
+	res := &proto.CategoryResponse{Category: &proto.Category{Id: int32(categoryCreated.Id), Name: categoryCreated.Name}}
+
+	return res, nil
 }
 
-func (s server) UpdateCategory(ctx context.Context, request *proto.UpdateCategoryRequest) (*proto.UpdateCategoryResponse, error) {
-	panic("implement me")
+func (s server) UpdateCategory(ctx context.Context, request *proto.UpdateCategoryRequest) (*proto.CategoryResponse, error) {
+	categoryUpdated := s.categoryService.Update(ctx, web.CategoryUpdateRequest{Id: int(request.Category.Id), Name: request.Category.Name})
+
+	res := &proto.CategoryResponse{Category: &proto.Category{Id: int32(categoryUpdated.Id), Name: categoryUpdated.Name}}
+
+	return res, nil
 }
 
-func (s server) GetCategory(ctx context.Context, request *proto.GetCategoryRequest) (*proto.GetCategoryResponse, error) {
-	categoryFound, err := s.categoryRepository.FindById(ctx, int(request.CategoryId))
-	if err != nil {
-		return nil, err
-	}
+func (s server) GetCategory(ctx context.Context, request *proto.GetCategoryRequest) (*proto.CategoryResponse, error) {
+	//categoryFound, err := s.categoryRepository.FindById(ctx, int(request.CategoryId))
+	//if err != nil {
+	//	return nil, err
+	//}
 
-	res := &proto.GetCategoryResponse{Category: &proto.Category{Id: int32(categoryFound.Id), Name: categoryFound.Name}}
+	categoryFound := s.categoryService.FindById(ctx, int(request.CategoryId))
+
+	res := &proto.CategoryResponse{Category: &proto.Category{Id: int32(categoryFound.Id), Name: categoryFound.Name}}
 
 	return res, nil
 }
@@ -40,7 +52,7 @@ func (s server) GetCategory(ctx context.Context, request *proto.GetCategoryReque
 func (s server) GetAllCategory(ctx context.Context, request *proto.GetAllCategoryRequest) (*proto.GetAllCategoryResponse, error) {
 	fmt.Printf("GetAllCategory function was invoked with %v", request)
 
-	categoriesRes := s.categoryRepository.FindAll(ctx)
+	categoriesRes := s.categoryService.FindAll(ctx)
 
 	fmt.Println("CategoriesREs", categoriesRes)
 	var categories []*proto.Category
@@ -58,7 +70,11 @@ func (s server) GetAllCategory(ctx context.Context, request *proto.GetAllCategor
 }
 
 func (s server) DeleteCategory(ctx context.Context, request *proto.DeleteCategoryRequest) (*proto.DeleteCategoryResponse, error) {
-	panic("implement me")
+	s.categoryService.Delete(ctx, int(request.CategoryId))
+
+	res := &proto.DeleteCategoryResponse{Message: "Category successfully deleted"}
+
+	return res, nil
 }
 
 func main() {
@@ -78,7 +94,7 @@ func main() {
 	db := app.NewDB(dbConfig)
 	validate := validator.New()
 	categoryRepository := repository.NewCategoryRepository(db, validate)
-	//categoryService := service.NewCategoryService(categoryRepository)
+	categoryService := service.NewCategoryService(categoryRepository)
 
 	list, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {
@@ -87,7 +103,7 @@ func main() {
 
 	s := grpc.NewServer()
 	proto.RegisterCategoryServiceServer(s, &server{
-		categoryRepository: categoryRepository,
+		categoryService: categoryService,
 	})
 
 	if err := s.Serve(list); err != nil {
