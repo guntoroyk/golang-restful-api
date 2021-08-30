@@ -3,6 +3,8 @@ package service
 import (
 	"context"
 	"fmt"
+	"github.com/guntoroyk/golang-restful-api/repository"
+	"reflect"
 	"testing"
 
 	"github.com/golang/mock/gomock"
@@ -141,5 +143,236 @@ func TestCategoryServiceImpl_Update(t *testing.T) {
 
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
+	}
+}
+
+func TestCategoryServiceImpl_Create1(t *testing.T) {
+	type fields struct {
+		CategoryRepository *mocks.MockCategoryRepository
+	}
+	type args struct {
+		ctx     context.Context
+		request web.CategoryCreateRequest
+	}
+
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+
+	mockCategoryRepo.EXPECT().Save(gomock.Any(), gomock.Any()).Return(domain.Category{Id: 1, Name: "Computer"})
+
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   web.CategoryResponse
+	}{
+		// TODO: Add test cases.
+		{
+			name: "Create category with name Computer",
+			fields: fields{
+				CategoryRepository: mockCategoryRepo,
+			},
+			args: args{ctx: context.Background(), request: web.CategoryCreateRequest{Name: "Computer"}},
+			want: web.CategoryResponse{
+				Id:   1,
+				Name: "Computer",
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			service := &CategoryServiceImpl{
+				CategoryRepository: tt.fields.CategoryRepository,
+			}
+			if got := service.Create(tt.args.ctx, tt.args.request); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Create() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestCategoryServiceImpl_Update1(t *testing.T) {
+	type fields struct {
+		CategoryRepository *mocks.MockCategoryRepository
+	}
+	type args struct {
+		ctx     context.Context
+		request web.CategoryUpdateRequest
+	}
+
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+
+	oldCategory := domain.Category{
+		Id:   1,
+		Name: "Computer",
+	}
+
+	mockCategoryRepo.EXPECT().FindById(gomock.Any(), 1).Return(oldCategory, nil)
+
+	updatedCategory := domain.Category{
+		Id:   1,
+		Name: "Gadget",
+	}
+
+	mockCategoryRepo.EXPECT().Update(gomock.Any(), updatedCategory).Return(updatedCategory)
+
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   web.CategoryResponse
+	}{
+		// TODO: Add test cases.
+		{
+			name: "Update category",
+			fields: fields{
+				CategoryRepository: mockCategoryRepo,
+			},
+			args: args{ctx: context.Background(), request: web.CategoryUpdateRequest{Id: 1, Name: "Gadget"}},
+			want: web.CategoryResponse{Id: updatedCategory.Id, Name: updatedCategory.Name},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			service := &CategoryServiceImpl{
+				CategoryRepository: tt.fields.CategoryRepository,
+			}
+			if got := service.Update(tt.args.ctx, tt.args.request); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Update() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestCategoryServiceImpl_Delete1(t *testing.T) {
+	type fields struct {
+		CategoryRepository *mocks.MockCategoryRepository
+	}
+	type args struct {
+		ctx        context.Context
+		categoryId int
+	}
+
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+
+	categoryToDelete := domain.Category{Id: 1, Name: "Computer"}
+
+	mockCategoryRepo.EXPECT().FindById(gomock.Any(), categoryToDelete.Id).Return(categoryToDelete, nil)
+	mockCategoryRepo.EXPECT().Delete(gomock.Any(), categoryToDelete)
+
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+	}{
+		// TODO: Add test cases.
+		{
+			name:   "Delete category",
+			fields: fields{CategoryRepository: mockCategoryRepo},
+			args:   args{ctx: context.Background(), categoryId: categoryToDelete.Id},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			service := &CategoryServiceImpl{
+				CategoryRepository: tt.fields.CategoryRepository,
+			}
+
+			service.Delete(tt.args.ctx, tt.args.categoryId)
+		})
+	}
+}
+
+func TestCategoryServiceImpl_FindById1(t *testing.T) {
+	type fields struct {
+		CategoryRepository repository.CategoryRepository
+	}
+	type args struct {
+		ctx        context.Context
+		categoryId int
+	}
+
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+
+	category := domain.Category{Id: 1, Name: "Computer"}
+
+	mockCategoryRepo.EXPECT().FindById(gomock.Any(), category.Id).Return(category, nil)
+
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   web.CategoryResponse
+	}{
+		// TODO: Add test cases.
+		{
+			name:   "Find a category by Id",
+			fields: fields{CategoryRepository: mockCategoryRepo},
+			args:   args{ctx: context.Background(), categoryId: category.Id},
+			want:   web.CategoryResponse{Id: category.Id, Name: category.Name},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			service := &CategoryServiceImpl{
+				CategoryRepository: tt.fields.CategoryRepository,
+			}
+			if got := service.FindById(tt.args.ctx, tt.args.categoryId); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("FindById() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestCategoryServiceImpl_FindAll1(t *testing.T) {
+	type fields struct {
+		CategoryRepository *mocks.MockCategoryRepository
+	}
+	type args struct {
+		ctx context.Context
+	}
+
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+
+	category := domain.Category{Id: 1, Name: "Computer"}
+	categories := []domain.Category{category}
+
+	mockCategoryRepo.EXPECT().FindAll(gomock.Any()).Return(categories)
+
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   []web.CategoryResponse
+	}{
+		// TODO: Add test cases.
+		{
+			name:   "Find all categories",
+			fields: fields{CategoryRepository: mockCategoryRepo},
+			args:   args{ctx: context.Background()},
+			want: []web.CategoryResponse{{
+				Id:   category.Id,
+				Name: category.Name,
+			}},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			service := &CategoryServiceImpl{
+				CategoryRepository: tt.fields.CategoryRepository,
+			}
+			if got := service.FindAll(tt.args.ctx); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("FindAll() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
