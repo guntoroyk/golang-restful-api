@@ -29,8 +29,11 @@ func (s server) CreateCategory(ctx context.Context, request *proto.CreateCategor
 }
 
 func (s server) UpdateCategory(ctx context.Context, request *proto.UpdateCategoryRequest) (*proto.CategoryResponse, error) {
-	categoryUpdated := s.categoryService.Update(ctx, web.CategoryUpdateRequest{Id: int(request.Category.Id), Name: request.Category.Name})
+	categoryUpdated, err := s.categoryService.Update(ctx, web.CategoryUpdateRequest{Id: int(request.Category.Id), Name: request.Category.Name})
 
+	if err != nil {
+		return nil, err
+	}
 	res := &proto.CategoryResponse{Category: &proto.Category{Id: int32(categoryUpdated.Id), Name: categoryUpdated.Name}}
 
 	return res, nil
@@ -42,7 +45,11 @@ func (s server) GetCategory(ctx context.Context, request *proto.GetCategoryReque
 	//	return nil, err
 	//}
 
-	categoryFound := s.categoryService.FindById(ctx, int(request.CategoryId))
+	categoryFound, err := s.categoryService.FindById(ctx, int(request.CategoryId))
+
+	if err != nil {
+		return nil, err
+	}
 
 	res := &proto.CategoryResponse{Category: &proto.Category{Id: int32(categoryFound.Id), Name: categoryFound.Name}}
 
@@ -70,7 +77,11 @@ func (s server) GetAllCategory(ctx context.Context, request *proto.GetAllCategor
 }
 
 func (s server) DeleteCategory(ctx context.Context, request *proto.DeleteCategoryRequest) (*proto.DeleteCategoryResponse, error) {
-	s.categoryService.Delete(ctx, int(request.CategoryId))
+	err := s.categoryService.Delete(ctx, int(request.CategoryId))
+
+	if err != nil {
+		return nil, err
+	}
 
 	res := &proto.DeleteCategoryResponse{Message: "Category successfully deleted"}
 

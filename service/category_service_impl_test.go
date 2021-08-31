@@ -51,11 +51,11 @@ func TestCategoryServiceImpl_FindById(t *testing.T) {
 
 	categoryService := NewCategoryService(mockCategoryRepo)
 
-	categoryResult := categoryService.FindById(context.Background(), 1)
+	categoryResult, _ := categoryService.FindById(context.Background(), 1)
 
 	fmt.Println("category", categoryResult)
 	got := categoryResult
-	want := web.CategoryResponse{Id: 1, Name: "Computer"}
+	want := &web.CategoryResponse{Id: 1, Name: "Computer"}
 
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
@@ -79,7 +79,7 @@ func TestCategoryServiceImpl_Create(t *testing.T) {
 	fmt.Println("CategoryResult", categoryResult)
 
 	got := categoryResult
-	want := web.CategoryResponse{Id: 1, Name: "Computer"}
+	want := &web.CategoryResponse{Id: 1, Name: "Computer"}
 
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
@@ -135,11 +135,11 @@ func TestCategoryServiceImpl_Update(t *testing.T) {
 
 	request := web.CategoryUpdateRequest{Id: 1, Name: "Gadget"}
 
-	categoryResult := categoryService.Update(context.Background(), request)
+	categoryResult, _ := categoryService.Update(context.Background(), request)
 	fmt.Println("CategoryResult", categoryResult)
 
 	got := categoryResult
-	want := web.CategoryResponse{Id: 1, Name: "Gadget"}
+	want := &web.CategoryResponse{Id: 1, Name: "Gadget"}
 
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
@@ -240,7 +240,7 @@ func TestCategoryServiceImpl_Update1(t *testing.T) {
 			service := &CategoryServiceImpl{
 				CategoryRepository: tt.fields.CategoryRepository,
 			}
-			if got := service.Update(tt.args.ctx, tt.args.request); !reflect.DeepEqual(got, tt.want) {
+			if got, _ := service.Update(tt.args.ctx, tt.args.request); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Update() = %v, want %v", got, tt.want)
 			}
 		})
@@ -309,14 +309,14 @@ func TestCategoryServiceImpl_FindById1(t *testing.T) {
 		name   string
 		fields fields
 		args   args
-		want   web.CategoryResponse
+		want   *web.CategoryResponse
 	}{
 		// TODO: Add test cases.
 		{
 			name:   "Find a category by Id",
 			fields: fields{CategoryRepository: mockCategoryRepo},
 			args:   args{ctx: context.Background(), categoryId: category.Id},
-			want:   web.CategoryResponse{Id: category.Id, Name: category.Name},
+			want:   &web.CategoryResponse{Id: category.Id, Name: category.Name},
 		},
 	}
 	for _, tt := range tests {
@@ -324,7 +324,7 @@ func TestCategoryServiceImpl_FindById1(t *testing.T) {
 			service := &CategoryServiceImpl{
 				CategoryRepository: tt.fields.CategoryRepository,
 			}
-			if got := service.FindById(tt.args.ctx, tt.args.categoryId); !reflect.DeepEqual(got, tt.want) {
+			if got, _ := service.FindById(tt.args.ctx, tt.args.categoryId); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("FindById() = %v, want %v", got, tt.want)
 			}
 		})
