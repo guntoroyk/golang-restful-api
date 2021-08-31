@@ -431,7 +431,7 @@ func TestCategoryServiceImpl_FindAll2(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name:   "Find all categories",
-			fields: fields{CategoryRepository: mockCategoryRepo},
+			fields: fields{CategoryRepository: mockCategoryRepo, CategoryCache: mockCategoryCache},
 			args:   args{ctx: context.Background()},
 			want: []*web.CategoryResponse{{
 				Id:   category.Id,

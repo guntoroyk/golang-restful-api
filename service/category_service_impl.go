@@ -54,7 +54,7 @@ func (service *CategoryServiceImpl) Update(ctx context.Context, request web.Cate
 
 	category = service.CategoryRepository.Update(ctx, category)
 
-	service.CategoryCache.Delete(context.Background(), category)
+	service.CategoryCache.Delete(ctx, category)
 
 	return helper.ToCategoryResponse(category), nil
 }
@@ -69,7 +69,7 @@ func (service *CategoryServiceImpl) Delete(ctx context.Context, categoryId int) 
 
 	service.CategoryRepository.Delete(ctx, category)
 
-	service.CategoryCache.Delete(context.Background(), category)
+	service.CategoryCache.Delete(ctx, category)
 
 	return nil
 }
@@ -90,14 +90,14 @@ func (service *CategoryServiceImpl) FindById(ctx context.Context, categoryId int
 		return nil, err
 	}
 
-	service.CategoryCache.SetCategory(context.Background(), category)
+	service.CategoryCache.SetCategory(ctx, category)
 
 	return helper.ToCategoryResponse(category), nil
 }
 
 func (service *CategoryServiceImpl) FindAll(ctx context.Context) []*web.CategoryResponse {
 
-	categoriesCache, err := service.CategoryCache.GetCategoryBatch(context.Background())
+	categoriesCache, err := service.CategoryCache.GetCategoryBatch(ctx)
 
 	if err == nil {
 		return helper.ToCategoryResponses(categoriesCache)
@@ -106,7 +106,7 @@ func (service *CategoryServiceImpl) FindAll(ctx context.Context) []*web.Category
 	categories := service.CategoryRepository.FindAll(ctx)
 
 	if len(categories) > 0 {
-		service.CategoryCache.SetCategoryBatch(context.Background(), categories)
+		service.CategoryCache.SetCategoryBatch(ctx, categories)
 	}
 
 	return helper.ToCategoryResponses(categories)

@@ -25,7 +25,7 @@ func (c CategoryCacheImpl) SetCategory(ctx context.Context, category domain.Cate
 		return err
 	}
 
-	err = c.redisClient.Set(ctx, key, json, 0).Err()
+	err = c.redisClient.Set(ctx, key, json, 5000).Err()
 	if err != nil {
 		log.Println("problem saving cache, err: ", err.Error())
 		return err
@@ -41,7 +41,7 @@ func (c CategoryCacheImpl) SetCategoryBatch(ctx context.Context, categories []do
 		return err
 	}
 
-	err = c.redisClient.Set(ctx, "categories", json, 0).Err()
+	err = c.redisClient.Set(ctx, "categories", json, 5000).Err()
 	if err != nil {
 		log.Println("problem saving cache, err: ", err.Error())
 		return err
