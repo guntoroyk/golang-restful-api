@@ -57,7 +57,7 @@ func (controller *CategoryControllerImpl) Update(writer http.ResponseWriter, req
 		webResponse = web.WebResponse{
 			Code:   500,
 			Status: err.Error(),
-			Data:   nil,
+			Data:   categoryResponse,
 		}
 	}
 

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/guntoroyk/golang-restful-api/cache"
 	"net/http"
 
 	"github.com/go-playground/validator"
@@ -24,10 +25,17 @@ func main() {
 		SSLMode:  "disable",
 	}
 
+	redisConfig := app.RedisConfig{
+		Addr: "localhost:6379",
+		DB:   0,
+	}
+
 	db := app.NewDB(dbConfig)
+	redisClient := app.NewRedisClient(redisConfig)
 	validate := validator.New()
 	categoryRepository := repository.NewCategoryRepository(db, validate)
-	categoryService := service.NewCategoryService(categoryRepository)
+	categoryCache := cache.NewCategoryCache(redisClient)
+	categoryService := service.NewCategoryService(categoryRepository, categoryCache)
 	categoryController := controller.NewCategoryController(categoryService)
 	router := app.NewRouter(categoryController)
 

@@ -3,6 +3,8 @@ package service
 import (
 	"context"
 	"fmt"
+	"github.com/guntoroyk/golang-restful-api/cache"
+	cache_mocks "github.com/guntoroyk/golang-restful-api/cache/mocks"
 	"github.com/guntoroyk/golang-restful-api/repository"
 	"reflect"
 	"testing"
@@ -25,7 +27,16 @@ func TestCategoryServiceImpl_FindAll(t *testing.T) {
 		Name: "Gadget",
 	}})
 
-	categoryService := NewCategoryService(mockCategoryRepo)
+	mockCategoryCache := cache_mocks.NewMockCategoryCache(mockCtrl)
+	mockCategoryCache.EXPECT().GetCategoryBatch(context.Background()).Return([]domain.Category{{
+		Id:   1,
+		Name: "Computer",
+	}, {
+		Id:   2,
+		Name: "Gadget",
+	}}, nil)
+
+	categoryService := NewCategoryService(mockCategoryRepo, mockCategoryCache)
 
 	categories := categoryService.FindAll(context.Background())
 
@@ -49,7 +60,10 @@ func TestCategoryServiceImpl_FindById(t *testing.T) {
 
 	mockCategoryRepo.EXPECT().FindById(context.Background(), category.Id).Return(domain.Category{Id: 1, Name: "Computer"}, nil)
 
-	categoryService := NewCategoryService(mockCategoryRepo)
+	mockCategoryCache := cache_mocks.NewMockCategoryCache(mockCtrl)
+	mockCategoryCache.EXPECT().GetCategory(context.Background(), category.Id).Return(domain.Category{Id: 1, Name: "Computer"}, nil)
+
+	categoryService := NewCategoryService(mockCategoryRepo, mockCategoryCache)
 
 	categoryResult, _ := categoryService.FindById(context.Background(), 1)
 
@@ -66,12 +80,15 @@ func TestCategoryServiceImpl_Create(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+	mockCategoryCache := cache_mocks.NewMockCategoryCache(mockCtrl)
 
 	category := domain.Category{
 		Name: "Computer",
 	}
 	mockCategoryRepo.EXPECT().Save(context.Background(), category).Return(domain.Category{Id: 1, Name: "Computer"})
-	categoryService := NewCategoryService(mockCategoryRepo)
+	mockCategoryCache.EXPECT().SetCategory(context.Background(), category).Return(domain.Category{Id: 1, Name: "Computer"})
+
+	categoryService := NewCategoryService(mockCategoryRepo, mockCategoryCache)
 
 	request := web.CategoryCreateRequest{Name: "Computer"}
 
@@ -90,6 +107,7 @@ func TestCategoryServiceImpl_Delete(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+	mockCategoryCache := cache_mocks.NewMockCategoryCache(mockCtrl)
 
 	category := domain.Category{
 		Id:   1,
@@ -98,8 +116,10 @@ func TestCategoryServiceImpl_Delete(t *testing.T) {
 
 	mockCategoryRepo.EXPECT().FindById(context.Background(), category.Id).Return(domain.Category{Id: 1, Name: "Computer"}, nil)
 	mockCategoryRepo.EXPECT().Delete(context.Background(), category)
+	mockCategoryCache.EXPECT().GetCategory(context.Background(), category.Id).Return(domain.Category{Id: 1, Name: "Computer"}, nil)
+	mockCategoryCache.EXPECT().Delete(context.Background(), category)
 
-	categoryService := NewCategoryService(mockCategoryRepo)
+	categoryService := NewCategoryService(mockCategoryRepo, mockCategoryCache)
 
 	categoryService.Delete(context.Background(), 1)
 
@@ -116,6 +136,7 @@ func TestCategoryServiceImpl_Update(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+	mockCategoryCache := cache_mocks.NewMockCategoryCache(mockCtrl)
 
 	oldCategory := domain.Category{
 		Id:   1,
@@ -130,8 +151,9 @@ func TestCategoryServiceImpl_Update(t *testing.T) {
 	}
 
 	mockCategoryRepo.EXPECT().Update(context.Background(), newCategory).Return(newCategory)
+	mockCategoryCache.EXPECT().Delete(context.Background(), oldCategory).Return(newCategory)
 
-	categoryService := NewCategoryService(mockCategoryRepo)
+	categoryService := NewCategoryService(mockCategoryRepo, mockCategoryCache)
 
 	request := web.CategoryUpdateRequest{Id: 1, Name: "Gadget"}
 
@@ -158,8 +180,11 @@ func TestCategoryServiceImpl_Create1(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+	mockCategoryCache := cache_mocks.NewMockCategoryCache(mockCtrl)
 
 	mockCategoryRepo.EXPECT().Save(gomock.Any(), gomock.Any()).Return(domain.Category{Id: 1, Name: "Computer"})
+	mockCategoryCache.EXPECT().GetCategoryBatch(gomock.Any()).Return([]domain.Category{{Id: 1, Name: "Computer"}}, nil)
+	mockCategoryCache.EXPECT().SetCategoryBatch(gomock.Any(), []domain.Category{{Id: 1, Name: "Computer"}}).Return([]domain.Category{{Id: 1, Name: "Computer"}}, nil)
 
 	tests := []struct {
 		name   string
@@ -200,10 +225,10 @@ func TestCategoryServiceImpl_Update1(t *testing.T) {
 		ctx     context.Context
 		request web.CategoryUpdateRequest
 	}
-
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+	mockCategoryCache := cache_mocks.NewMockCategoryCache(mockCtrl)
 
 	oldCategory := domain.Category{
 		Id:   1,
@@ -211,6 +236,7 @@ func TestCategoryServiceImpl_Update1(t *testing.T) {
 	}
 
 	mockCategoryRepo.EXPECT().FindById(gomock.Any(), 1).Return(oldCategory, nil)
+	mockCategoryCache.EXPECT().Delete(gomock.Any(), oldCategory).Return(nil)
 
 	updatedCategory := domain.Category{
 		Id:   1,
@@ -255,15 +281,16 @@ func TestCategoryServiceImpl_Delete1(t *testing.T) {
 		ctx        context.Context
 		categoryId int
 	}
-
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+	mockCategoryCache := cache_mocks.NewMockCategoryCache(mockCtrl)
 
 	categoryToDelete := domain.Category{Id: 1, Name: "Computer"}
 
 	mockCategoryRepo.EXPECT().FindById(gomock.Any(), categoryToDelete.Id).Return(categoryToDelete, nil)
 	mockCategoryRepo.EXPECT().Delete(gomock.Any(), categoryToDelete)
+	mockCategoryCache.EXPECT().Delete(gomock.Any(), categoryToDelete).Return(nil)
 
 	tests := []struct {
 		name   string
@@ -296,7 +323,6 @@ func TestCategoryServiceImpl_FindById1(t *testing.T) {
 		ctx        context.Context
 		categoryId int
 	}
-
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
@@ -338,7 +364,6 @@ func TestCategoryServiceImpl_FindAll1(t *testing.T) {
 	type args struct {
 		ctx context.Context
 	}
-
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
@@ -369,6 +394,56 @@ func TestCategoryServiceImpl_FindAll1(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			service := &CategoryServiceImpl{
 				CategoryRepository: tt.fields.CategoryRepository,
+			}
+			if got := service.FindAll(tt.args.ctx); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("FindAll() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestCategoryServiceImpl_FindAll2(t *testing.T) {
+	type fields struct {
+		CategoryRepository repository.CategoryRepository
+		CategoryCache      cache.CategoryCache
+	}
+	type args struct {
+		ctx context.Context
+	}
+
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockCategoryRepo := mocks.NewMockCategoryRepository(mockCtrl)
+	mockCategoryCache := cache_mocks.NewMockCategoryCache(mockCtrl)
+
+	category := domain.Category{Id: 1, Name: "Computer"}
+	categories := []domain.Category{category}
+
+	//mockCategoryRepo.EXPECT().FindAll(gomock.Any()).Times(1).Return(categories)
+	mockCategoryCache.EXPECT().GetCategoryBatch(gomock.Any()).Times(1).Return(categories, nil)
+
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   []*web.CategoryResponse
+	}{
+		// TODO: Add test cases.
+		{
+			name:   "Find all categories",
+			fields: fields{CategoryRepository: mockCategoryRepo},
+			args:   args{ctx: context.Background()},
+			want: []*web.CategoryResponse{{
+				Id:   category.Id,
+				Name: category.Name,
+			}},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			service := &CategoryServiceImpl{
+				CategoryRepository: tt.fields.CategoryRepository,
+				CategoryCache:      tt.fields.CategoryCache,
 			}
 			if got := service.FindAll(tt.args.ctx); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("FindAll() = %v, want %v", got, tt.want)

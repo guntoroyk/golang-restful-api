@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/guntoroyk/golang-restful-api/cache"
 	"github.com/guntoroyk/golang-restful-api/model/web"
 	"github.com/guntoroyk/golang-restful-api/service"
 	"log"
@@ -101,11 +102,18 @@ func main() {
 		Host:     "localhost",
 		SSLMode:  "disable",
 	}
+	redisConfig := app.RedisConfig{
+		Addr: "localhost:6379",
+		DB:   0,
+	}
 
 	db := app.NewDB(dbConfig)
+	redisClient := app.NewRedisClient(redisConfig)
+
 	validate := validator.New()
 	categoryRepository := repository.NewCategoryRepository(db, validate)
-	categoryService := service.NewCategoryService(categoryRepository)
+	categoryCache := cache.NewCategoryCache(redisClient)
+	categoryService := service.NewCategoryService(categoryRepository, categoryCache)
 
 	list, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {
