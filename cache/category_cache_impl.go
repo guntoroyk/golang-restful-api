@@ -7,6 +7,7 @@ import (
 	"github.com/go-redis/redis/v8"
 	"github.com/guntoroyk/golang-restful-api/model/domain"
 	"log"
+	"time"
 )
 
 type CategoryCacheImpl struct {
@@ -19,13 +20,15 @@ func NewCategoryCache(redisClient *redis.Client) CategoryCache {
 
 func (c CategoryCacheImpl) SetCategory(ctx context.Context, category domain.Category) error {
 	key := fmt.Sprintf("category:%d", category.Id)
+	expiration := 5 * time.Minute
+
 	json, err := json.Marshal(category)
 	if err != nil {
 		log.Println("problem marshalling cache, err: ", err.Error())
 		return err
 	}
 
-	err = c.redisClient.Set(ctx, key, json, 5000).Err()
+	err = c.redisClient.Set(ctx, key, json, expiration).Err()
 	if err != nil {
 		log.Println("problem saving cache, err: ", err.Error())
 		return err
@@ -36,12 +39,14 @@ func (c CategoryCacheImpl) SetCategory(ctx context.Context, category domain.Cate
 
 func (c CategoryCacheImpl) SetCategoryBatch(ctx context.Context, categories []domain.Category) error {
 	json, err := json.Marshal(categories)
+	expiration := 5 * time.Minute
+
 	if err != nil {
 		log.Println("problem marshalling cache, err: ", err.Error())
 		return err
 	}
 
-	err = c.redisClient.Set(ctx, "categories", json, 5000).Err()
+	err = c.redisClient.Set(ctx, "categories", json, expiration).Err()
 	if err != nil {
 		log.Println("problem saving cache, err: ", err.Error())
 		return err
@@ -83,6 +88,9 @@ func (c CategoryCacheImpl) GetCategoryBatch(ctx context.Context) ([]domain.Categ
 	var resp []domain.Category
 
 	val, err := c.redisClient.Get(ctx, "categories").Result()
+
+	fmt.Printf("error: %s", err)
+	fmt.Printf("error text: %s", err.Error())
 
 	if err != nil {
 		return resp, err
