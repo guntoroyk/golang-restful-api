@@ -58,7 +58,7 @@ func (c CategoryCacheImpl) SetCategoryBatch(ctx context.Context, categories []do
 func (c CategoryCacheImpl) Delete(ctx context.Context, category domain.Category) error {
 	key := fmt.Sprintf("category:%d", category.Id)
 
-	err := c.redisClient.Del(ctx, key).Err()
+	_, err := c.redisClient.Del(ctx, key).Result()
 	if err != nil {
 		log.Println("problem deleting cache, err: ", err.Error())
 		return err
@@ -88,9 +88,6 @@ func (c CategoryCacheImpl) GetCategoryBatch(ctx context.Context) ([]domain.Categ
 	var resp []domain.Category
 
 	val, err := c.redisClient.Get(ctx, "categories").Result()
-
-	fmt.Printf("error: %s", err)
-	fmt.Printf("error text: %s", err.Error())
 
 	if err != nil {
 		return resp, err

@@ -8,6 +8,7 @@ require (
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/go-redis/redis/v8 v8.11.3
+	github.com/go-redis/redismock/v8 v8.0.6
 	github.com/golang/mock v1.6.0
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/leodido/go-urn v1.2.1 // indirect
